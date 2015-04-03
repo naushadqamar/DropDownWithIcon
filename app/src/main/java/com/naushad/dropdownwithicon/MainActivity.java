@@ -4,14 +4,23 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Spinner;
+
+import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity {
-
+    Spinner spinnerFineType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        spinnerFineType= (Spinner) findViewById(R.id.fine_type);
+        CommonService lookupService =  new CommonService(getApplicationContext());
+        List<SpinnerObject> spnFineTypes = lookupService.getFineTypes();
+        SpinnerWithImageAdapter adpFineTypes = new SpinnerWithImageAdapter(this,R.layout.row,spnFineTypes);
+        spinnerFineType.setAdapter(adpFineTypes);
     }
 
 
